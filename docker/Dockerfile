@@ -7,5 +7,5 @@ ADD . .
 
 RUN npm install
 
-EXPOSE 4200
+#EXPOSE 4200
 ENTRYPOINT ["npm", "run", "start"]

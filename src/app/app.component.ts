@@ -27,7 +27,20 @@ export class AppComponent implements OnDestroy {
       // this.message = message.payload.toString();
       // console.log('message', this.message);
       this.co2Value = +message.payload.toString();
-      this.background = 'red';
+      console.log('this.co2Value', this.co2Value);
+      if (this.co2Value < 500) {
+        this.mainBackground = 'darkgray';
+        this.background = 'transparent';
+      } else if (this.co2Value < 700) {
+        this.mainBackground = 'gray';
+        this.background = 'gray';
+      } else if (this.co2Value < 1000) {
+        this.mainBackground = 'yellow';
+        this.background = 'yellow';
+      } else {
+        this.mainBackground = 'red';
+        this.background = 'red';
+      }
     });
   }
 
