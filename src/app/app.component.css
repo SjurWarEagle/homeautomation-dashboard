@@ -1,0 +1,23 @@
+.main {
+  height: 100vh;
+  width: 100vw;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.co2value{
+  font-weight: normal;
+  font-size: 200px;
+}
+
+.co2-header{
+  font-weight: normal;
+  font-size: x-large;
+  color: darkgray;
+}
+
+
+.start-button{
+  font-size: xx-large;
+}
