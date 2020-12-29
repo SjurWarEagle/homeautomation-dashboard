@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { IMqttMessage, MqttService } from 'ngx-mqtt';
 import { Subscription } from 'rxjs';
+import {BikeData} from '../types/bike-data';
 import NoSleep from 'nosleep.js';
-import { BikeData } from '../types/BikeData';
+
 
 // tslint:disable-next-line
 var noSleep = new NoSleep();
@@ -16,8 +17,8 @@ export class AppComponent implements OnDestroy, OnInit {
   @ViewChild('startButton')
   private startButton: any;
 
-  private subscriptionCo2Value: Subscription;
-  private subscriptionBikeAll: Subscription;
+  private readonly subscriptionCo2Value: Subscription;
+  private readonly subscriptionBikeAll: Subscription;
   public co2Value: number;
   public bikeValues: BikeData;
   public mainBackground = 'black';
@@ -36,13 +37,13 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptionBikeAll = this.mqttService
       .observe('/home/livingroom/bike/all')
       .subscribe((message: IMqttMessage) => {
-        this.bikeValues = JSON.parse(message.payload.toString());
-        console.log(
-          'bike message ',
-          JSON.parse(message.payload.toString()).data
-        );
-        // this.co2Value = +message.payload.toString();
-        // this.updateColors();
+        this.bikeValues = JSON.parse(message.payload.toString()).data;
+        // console.log(
+        //   'bike message ',
+        //   JSON.parse(message.payload.toString())
+        // );
+
+        this.updateColors();
       });
   }
 
@@ -77,7 +78,8 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public showBikeValues(): boolean {
-    return +this.bikeValues?.speed > 0 || +this.bikeValues?.distance > 0;
+    return true;
+    // return +this.bikeValues?.speed > 0 || +this.bikeValues?.distance > 0;
   }
 
   public start(): void {
