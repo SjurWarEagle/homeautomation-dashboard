@@ -1,3 +1,4 @@
+Dockerfile
 FROM node:15.3.0
 
 RUN mkdir -p /project
@@ -7,5 +8,5 @@ ADD . .
 
 RUN npm install
 
-#EXPOSE 4200
+EXPOSE 4200
 ENTRYPOINT ["npm", "run", "start"]
