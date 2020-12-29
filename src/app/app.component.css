@@ -39,5 +39,6 @@
 }
 
 .start-button {
+  display: block;
   font-size: xx-large;
 }
