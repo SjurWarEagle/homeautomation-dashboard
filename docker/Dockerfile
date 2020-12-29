@@ -1,4 +1,3 @@
-Dockerfile
 FROM node:15.3.0
 
 RUN mkdir -p /project
