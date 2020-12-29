@@ -1,8 +1,8 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {IMqttMessage, MqttService} from 'ngx-mqtt';
-import {Subscription} from 'rxjs';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { IMqttMessage, MqttService } from 'ngx-mqtt';
+import { Subscription } from 'rxjs';
 import NoSleep from 'nosleep.js';
-import {BikeData} from '../types/BikeData';
+import { BikeData } from '../types/BikeData';
 
 // tslint:disable-next-line
 var noSleep = new NoSleep();
@@ -37,7 +37,10 @@ export class AppComponent implements OnDestroy, OnInit {
       .observe('/home/livingroom/bike/all')
       .subscribe((message: IMqttMessage) => {
         this.bikeValues = JSON.parse(message.payload.toString());
-        // console.log('message', JSON.parse(message.payload.toString()).data);
+        console.log(
+          'bike message ',
+          JSON.parse(message.payload.toString()).data
+        );
         // this.co2Value = +message.payload.toString();
         // this.updateColors();
       });
@@ -48,7 +51,7 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   private updateColors(): void {
-    console.log('this.co2Value', this.co2Value);
+    // console.log('this.co2Value', this.co2Value);
     if (this.co2Value < 500) {
       this.mainBackground = 'darkgray';
       this.background = 'transparent';
