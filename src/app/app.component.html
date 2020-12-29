@@ -1,13 +1,20 @@
-<body
-  class="main"
-  [style.background-color]="mainBackground"
->
-<button #startButton class="start-button" *ngIf="!started" (click)="start()">Disable Powersave</button>
+<body class="main" [style.background-color]="mainBackground">
+  <button #startButton class="start-button" *ngIf="!started" (click)="start()">
+    Disable Powersave
+  </button>
 
-<div>
-  <h1 class="co2-header">🌬 Wohnzimmer 🎈 CO2 🎈</h1>
-  <div class="co2value"
-       [style.background-color]="background"
-  >{{co2Value}} ppm</div>
-</div>
+  <div class="all">
+    <div class="co2">
+      <h1 class="co2-header">🌬 Wohnzimmer 🎈 CO2 🎈</h1>
+      <div class="co2-value" [style.background-color]="background">
+        {{ co2Value }} ppm
+      </div>
+    </div>
+    <div class="bike-speed" *ngIf="showBikeValues()">
+      🚲 {{ bikeValues?.speed }} km/h
+    </div>
+    <div class="bike-distance" *ngIf="showBikeValues()">
+      🗺 {{ bikeValues?.distance }} km
+    </div>
+  </div>
 </body>

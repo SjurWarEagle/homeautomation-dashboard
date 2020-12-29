@@ -1,7 +1,8 @@
-import {Component, OnDestroy, ViewChild} from '@angular/core';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {IMqttMessage, MqttService} from 'ngx-mqtt';
 import {Subscription} from 'rxjs';
 import NoSleep from 'nosleep.js';
+import {BikeData} from '../types/BikeData';
 
 // tslint:disable-next-line
 var noSleep = new NoSleep();
@@ -9,43 +10,71 @@ var noSleep = new NoSleep();
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
-
-export class AppComponent implements OnDestroy {
+export class AppComponent implements OnDestroy, OnInit {
   @ViewChild('startButton')
   private startButton: any;
 
-  private subscription: Subscription;
+  private subscriptionCo2Value: Subscription;
+  private subscriptionBikeAll: Subscription;
   public co2Value: number;
+  public bikeValues: BikeData;
   public mainBackground = 'black';
   public background = 'gray';
   public started: boolean;
 
   constructor(private mqttService: MqttService) {
-    this.subscription = this.mqttService.observe('home/livingroom/co2/value').subscribe((message: IMqttMessage) => {
-      // this.message = message.payload.toString();
-      // console.log('message', this.message);
-      this.co2Value = +message.payload.toString();
-      console.log('this.co2Value', this.co2Value);
-      if (this.co2Value < 500) {
-        this.mainBackground = 'darkgray';
-        this.background = 'transparent';
-      } else if (this.co2Value < 700) {
-        this.mainBackground = 'gray';
-        this.background = 'gray';
-      } else if (this.co2Value < 1000) {
-        this.mainBackground = 'yellow';
-        this.background = 'yellow';
-      } else {
-        this.mainBackground = 'red';
-        this.background = 'red';
-      }
-    });
+    this.subscriptionCo2Value = this.mqttService
+      .observe('home/livingroom/co2/value')
+      .subscribe((message: IMqttMessage) => {
+        // this.message = message.payload.toString();
+        // console.log('message', this.message);
+        this.co2Value = +message.payload.toString();
+        this.updateColors();
+      });
+    this.subscriptionBikeAll = this.mqttService
+      .observe('/home/livingroom/bike/all')
+      .subscribe((message: IMqttMessage) => {
+        this.bikeValues = JSON.parse(message.payload.toString());
+        // console.log('message', JSON.parse(message.payload.toString()).data);
+        // this.co2Value = +message.payload.toString();
+        // this.updateColors();
+      });
+  }
+
+  public ngOnInit(): void {
+    this.updateColors();
+  }
+
+  private updateColors(): void {
+    console.log('this.co2Value', this.co2Value);
+    if (this.co2Value < 500) {
+      this.mainBackground = 'darkgray';
+      this.background = 'transparent';
+    } else if (this.co2Value < 700) {
+      this.mainBackground = 'gray';
+      this.background = 'gray';
+    } else if (this.co2Value < 1000) {
+      this.mainBackground = 'yellow';
+      this.background = 'yellow';
+    } else {
+      this.mainBackground = 'red';
+      this.background = 'red';
+    }
   }
 
   public ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    if (this.subscriptionCo2Value) {
+      this.subscriptionCo2Value.unsubscribe();
+    }
+    if (this.subscriptionBikeAll) {
+      this.subscriptionBikeAll.unsubscribe();
+    }
+  }
+
+  public showBikeValues(): boolean {
+    return +this.bikeValues?.speed > 0 || +this.bikeValues?.distance > 0;
   }
 
   public start(): void {
