@@ -8,6 +8,7 @@ import NoSleep from 'nosleep.js';
 // tslint:disable-next-line
 var noSleep = new NoSleep();
 
+// @ts-ignore
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
