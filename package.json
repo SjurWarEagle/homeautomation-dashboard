@@ -11,9 +11,13 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prettier": "prettier -w src",
+    "git": "run-s git:add git:commit git:push",
+    "git:commit": "git commit -m \"update dependencies\"",
+    "git:add": "git add package.json package-lock.json",
+    "git:push": "git push",
     "dependencies:update": "ncu -u -x typescript,ngx-mqtt",
     "dependencies:install": "npm install",
-    "update:dependencies and build": "run-s dependencies:update dependencies:install build"
+    "update:dependencies and build": "run-s dependencies:update dependencies:install build git"
   },
   "private": true,
   "dependencies": {
@@ -37,7 +41,7 @@
     "@angular/cli": "11.2.4",
     "@angular/compiler-cli": "11.2.5",
     "@types/jasmine": "3.6.6",
-    "@types/node": "14.14.33",
+    "@types/node": "14.14.35",
     "codelyzer": "6.0.1",
     "jasmine-core": "3.6.0",
     "jasmine-spec-reporter": "6.0.0",
@@ -50,7 +54,7 @@
     "protractor": "7.0.0",
     "ts-node": "9.1.1",
     "tslint": "6.1.0",
-    "npm-check-updates": "11.2.2",
+    "npm-check-updates": "11.3.0",
     "prettier": "2.2.1",
     "typescript": "4.1.5"
   }
