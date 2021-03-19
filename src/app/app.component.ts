@@ -30,8 +30,6 @@ export class AppComponent implements OnDestroy, OnInit {
     this.subscriptionCo2Value = this.mqttService
       .observe('home/livingroom/co2/value')
       .subscribe((message: IMqttMessage) => {
-        // this.message = message.payload.toString();
-        // console.log('message', this.message);
         this.co2Value = +message.payload.toString();
         this.updateColors();
       });
@@ -39,10 +37,6 @@ export class AppComponent implements OnDestroy, OnInit {
       .observe('/home/livingroom/bike/all')
       .subscribe((message: IMqttMessage) => {
         this.bikeValues = JSON.parse(message.payload.toString()).data;
-        // console.log(
-        //   'bike message ',
-        //   JSON.parse(message.payload.toString())
-        // );
 
         this.updateColors();
       });
@@ -53,7 +47,6 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   private updateColors(): void {
-    // console.log('this.co2Value', this.co2Value);
     if (this.co2Value < 500) {
       this.mainBackground = 'darkgray';
       this.background = 'transparent';
@@ -80,7 +73,6 @@ export class AppComponent implements OnDestroy, OnInit {
 
   public showBikeValues(): boolean {
     return true;
-    // return +this.bikeValues?.speed > 0 || +this.bikeValues?.distance > 0;
   }
 
   public start(): void {
