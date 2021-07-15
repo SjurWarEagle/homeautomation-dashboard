@@ -1,4 +1,11 @@
-.all {
+.all-co2 {
+  display: grid;
+  grid-template-areas:
+    " co2 co2 "
+    " bikeSpeed bikeDistance";
+}
+
+.all-bike {
   display: grid;
   grid-template-areas:
     " co2 co2 "

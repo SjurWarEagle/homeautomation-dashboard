@@ -1,0 +1,12 @@
+version: '3.3'
+
+services:
+  homeautomation-dashboard:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../nginx/exp.conf:/etc/nginx/conf.d/default.conf:ro
+    ports:
+      - 91:91
+    restart: unless-stopped
