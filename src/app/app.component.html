@@ -1,22 +1,36 @@
 <body class="main" [style.background-color]="mainBackground">
-1
-<div [ngClass]="{
-  'all-co2': !bikeValues?.speed,
-  'all-bike': bikeValues?.speed
-  }">
-  <button #startButton class="start-button" *ngIf="!started" (click)="start()">
-    Disable Powersave
-  </button>
-  <div class="co2">
-    <div class="co2-value" [style.background-color]="background">
-      {{ co2Value }} ppm
+  <div [ngClass]="{
+    'all-co2': !bikeValues?.distance || bikeValues?.distance === '0.0',
+    'all-bike': bikeValues?.distance !== '0.0'
+    }">
+    <button #startButton class="start-button" *ngIf="!started" (click)="start()">
+      Disable Powersave
+    </button>
+    <div class="co2">
+      <div class="co2-value" [style.background-color]="background"
+           [ngClass]="{
+            'is-not-active': !bikeValues?.distance || bikeValues?.distance==='0.0',
+            'is-active': bikeValues?.distance!=='0.0'
+           }"
+      >
+        {{ co2Value }} ppm
+      </div>
+    </div>
+    <div class="bike-speed" *ngIf="showBikeValues()"
+         [ngClass]="{
+          'is-not-active': !bikeValues?.distance || bikeValues?.distance==='0.0',
+          'is-not-active': bikeValues?.distance==='0.0'
+         }"
+    >
+      🚲 {{ bikeValues?.speed }}
+    </div>
+    <div class="bike-distance" *ngIf="showBikeValues()"
+         [ngClass]="{
+          'is-not-active': !bikeValues?.distance || bikeValues?.distance==='0.0',
+          'is-active': bikeValues?.distance!=='0.0'
+         }"
+    >
+      🗺 {{ bikeValues?.distance }}
     </div>
   </div>
-  <div class="bike-speed" *ngIf="showBikeValues()">
-    🚲 {{ bikeValues?.speed }} km/h
-  </div>
-  <div class="bike-distance" *ngIf="showBikeValues()">
-    🗺 {{ bikeValues?.distance }} km
-  </div>
-</div>
 </body>

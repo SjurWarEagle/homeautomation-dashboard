@@ -8,8 +8,9 @@
 .all-bike {
   display: grid;
   grid-template-areas:
+    " bikeSpeed bikeDistance"
     " co2 co2 "
-    " bikeSpeed bikeDistance";
+;
 }
 
 .main {
@@ -22,11 +23,17 @@
 
 .bike-distance {
   grid-area: bikeDistance;
-  font-size: 100px;
 }
 
 .bike-speed {
   grid-area: bikeSpeed;
+}
+
+.is-active {
+  font-size: 200px;
+}
+
+.is-not-active {
   font-size: 100px;
 }
 
@@ -36,7 +43,6 @@
 
 .co2-value {
   font-weight: normal;
-  font-size: 200px;
 }
 
 .co2-header {
