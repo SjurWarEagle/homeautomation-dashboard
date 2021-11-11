@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { IMqttMessage, MqttService } from 'ngx-mqtt';
-import { Subscription } from 'rxjs';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {IMqttMessage, MqttService} from 'ngx-mqtt';
+import {Subscription} from 'rxjs';
 import {BikeData} from '../types/bike-data';
 import NoSleep from 'nosleep.js';
 
@@ -72,7 +72,8 @@ export class AppComponent implements OnDestroy, OnInit {
   }
 
   public showBikeValues(): boolean {
-    return true;
+    return this.bikeValues
+      && (this.bikeValues.rpm && +this.bikeValues.rpm > 0 || this.bikeValues.distance && +this.bikeValues.distance > 0);
   }
 
   public start(): void {
