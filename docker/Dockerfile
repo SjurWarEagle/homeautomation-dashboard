@@ -1,4 +1,4 @@
-FROM node:15.3.0-stretch
+FROM node:16.12.0-stretch
 RUN mkdir -p /project/
 
 RUN apt update -y && \
