@@ -30,7 +30,7 @@
 }
 
 .is-active {
-  font-size: 50vh;
+  font-size: 25vh;
 }
 
 .is-not-active {
@@ -42,7 +42,7 @@
 }
 
 .co2-value {
-  font-size: 50vh;
+  font-size: 25vh;
   font-weight: normal;
 }
 
