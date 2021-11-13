@@ -73,7 +73,8 @@ export class AppComponent implements OnDestroy, OnInit {
 
   public showBikeValues(): boolean {
     return this.bikeValues
-      && (this.bikeValues.rpm && +this.bikeValues.rpm > 0 || this.bikeValues.distance && +this.bikeValues.distance > 0);
+      && (this.bikeValues.rpm && +this.bikeValues.rpm > 0 || this.bikeValues.distance && +this.bikeValues.distance > 0)
+      ;
   }
 
   public start(): void {

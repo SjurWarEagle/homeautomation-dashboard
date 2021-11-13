@@ -19,7 +19,7 @@
     <div class="bike-speed" *ngIf="showBikeValues()"
          [ngClass]="{
           'is-not-active': !bikeValues?.distance || bikeValues?.distance==='0.0',
-          'is-not-active': bikeValues?.distance==='0.0'
+          'is-active': bikeValues?.distance==='0.0'
          }"
     >
       🚲 {{ bikeValues?.speed }}
